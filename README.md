@@ -44,14 +44,62 @@ The program walks through the directory structure, collecting files that match a
    make
    ```
    
-2. **Run with desired depth, arguments. (learn more about command-line arguments** [HERE](#command-line-arguments) 
+2. **Run with desired depth, arguments.** *(learn more about command-line arguments*[HERE](#command-line-arguments) *)*
 
-<p align="center">Use compiler.c to compile from <code>.txt</code> or <code>.asm</code> to <code>.bin</code></p>
+<p align="center">Lexicographic example</p>
 <p align="center">
-  <img src="https://i.imgur.com/rU4xso6.png" width="40%" alt="find tree"/>
-  <img src="https://i.imgur.com/uVDds32.png" width="40%" alt="instructions .bin"/>
+  <img src="https://i.imgur.com/TpJk564.png" width="80%" alt="find tree (lexicographic)"/>
 </p>
 
+I will show some argument examples on this example dir tree *(copy *[HERE](##script.sh) *)*
+```
+testdir/
+├── file1.txt
+├── file2.log
+├── .hiddenfile
+├── .hiddendir/
+│   └── secret.txt
+├── subdir1/
+│   ├── nested1.txt
+│   └── subdir2/
+│       ├── nested2.log
+│       └── subdir3/
+│           ├── deep.txt
+│           └── subdir4/
+│               └── deepest.txt
+├── largefile.bin
+├── owned_by_other.txt
+└── exec.sh
+```
+<p align="center">Lexicographic example</p>
+<p align="center">
+  <img src="https://i.imgur.com/TpJk564.png" width="90%" alt="find tree (lexicographic)"/>
+</p>
+
+<p align="center">find all | find all + hidden/p>
+<p align="center">
+  <img src="https://i.imgur.com/1NUDmIP.png" width="44%" alt="find -a"/>
+  <img src="https://i.imgur.com/F7qycYS.png" width="46%" alt="find "/>
+</p>
+
+<p align="center">find by name | find by name hidden</p>
+<p align="center">
+  <img src="https://i.imgur.com/P6jTTTN.png" width="50%" alt="find -n"/>
+  <img src="https://i.imgur.com/OosagJ9.png" width="40%" alt="find -n -a "/>
+</p>
+
+<p align="center">find min depth 4 | find max depth 1 (note: root dir is depth 0)</p>
+<p align="center">
+  <img src="https://i.imgur.com/6K20o5j.png" width="48%" alt="find -f"/>
+  <img src="https://i.imgur.com/pUSBl3e.png" width="40%" alt="find -t "/>
+</p>
+
+
+<p align="center">find by mask 755 (chmod +x) | find by user > nobody < </p>
+<p align="center">
+  <img src="https://i.imgur.com/8iKR8D0.png" width="40%" alt="find -m"/>
+  <img src="https://i.imgur.com/YL9fHOB.png" width="44%" alt="find -u "/>
+</p>
 ---
 
 ## Error Handling
@@ -94,3 +142,39 @@ All errors and warnings are printed to **stderr**. The program never crashes on 
 
 - `-h` – Display help text to **stderr** and exit.  
 ---
+
+Example script
+## script.sh 
+```
+#!/bin/bash
+
+# basic structure
+mkdir -p testdir/.hiddendir
+mkdir -p testdir/subdir1/subdir2/subdir3/subdir4
+
+# some files
+echo "Hello" > testdir/file1.txt
+dd if=/dev/zero of=testdir/file2.log bs=1K count=2
+
+# hidden
+echo "Hidden file" > testdir/.hiddenfile
+echo "Secret content" > testdir/.hiddendir/secret.txt
+
+# nested (depth 1-4)
+echo "Level 1" > testdir/subdir1/nested1.txt
+echo "Level 2" > testdir/subdir1/subdir2/nested2.log
+echo "Level 3" > testdir/subdir1/subdir2/subdir3/deep.txt
+echo "Level 4" > testdir/subdir1/subdir2/subdir3/subdir4/deepest.txt
+
+# big file
+dd if=/dev/zero of=testdir/largefile.bin bs=1M count=5
+
+# exe file
+echo -e "#!/bin/bash\necho Hello" > testdir/exec.sh
+chmod +x testdir/exec.sh
+
+# file with other owner (works only with sudo rights)
+sudo touch testdir/owned_by_other.txt
+sudo chown nobody:nogroup testdir/owned_by_other.txt
+```
+
