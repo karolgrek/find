@@ -44,7 +44,13 @@ The program walks through the directory structure, collecting files that match a
    make
    ```
    
-2. ** Run with desired depth, arguments. (learn more about command-line arguments [HERE](#command-line-arguments)
+2. **Run with desired depth, arguments. (learn more about command-line arguments** [HERE](#command-line-arguments) 
+
+<p align="center">Use compiler.c to compile from <code>.txt</code> or <code>.asm</code> to <code>.bin</code></p>
+<p align="center">
+  <img src="https://i.imgur.com/rU4xso6.png" width="40%" alt="find tree"/>
+  <img src="https://i.imgur.com/uVDds32.png" width="40%" alt="instructions .bin"/>
+</p>
 
 ---
 
