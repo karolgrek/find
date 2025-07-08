@@ -44,14 +44,14 @@ The program walks through the directory structure, collecting files that match a
    make
    ```
    
-2. **Run with desired depth, arguments.** *(learn more about command-line arguments*[bottom of the page](#command-line-arguments) *)*
+2. **Run with desired depth, arguments.** *(learn more about command-line arguments* [arguments](#command-line-arguments) *)*
 
 <p align="center">Lexicographic example</p>
 <p align="center">
   <img src="https://i.imgur.com/TpJk564.png" width="80%" alt="find tree (lexicographic)"/>
 </p>
 
-I will show some argument examples on this example dir tree *(copy* [bottom of the page](##script.sh) *)*
+I will show some argument examples on this example dir tree *(copy* [example](##script.sh) *)*
 ```
 testdir/
 ├── file1.txt
