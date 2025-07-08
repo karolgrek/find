@@ -51,7 +51,7 @@ The program walks through the directory structure, collecting files that match a
   <img src="https://i.imgur.com/TpJk564.png" width="80%" alt="find tree (lexicographic)"/>
 </p>
 
-I will show some argument examples on this example dir tree *(copy* [example](##script.sh) *)*
+I will show some argument examples on this example dir tree *(copy* [example](#script.sh) *)*
 ```
 testdir/
 ├── file1.txt
