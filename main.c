@@ -8,12 +8,6 @@
 #include "utils.h"
 
 
-/**
- * This file should only contain the main function and
- * command line arguments processing logic. You shouldn't use it
- * for any logic apart from that. Create some own .h/.c files by yourselves.
- */
-
 int main(int argc, char *argv[])
 {
 	switches_info switches = {0};
